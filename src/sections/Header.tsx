@@ -88,8 +88,8 @@ export default function Header() {
       )}
       <StyledHeader>
         <div style={{ display: 'flex', gap: '20px', alignItems: 'center' }}>
-          <Logo to="https://x.com/">
-            <img alt="Gamba logo" src="/x.jpg" />
+          <Logo to="https://x.com/BonkasinoSol">
+            <img alt="X Logo" src="/x.jpg" />
           </Logo>
         </div>
         <div style={{ display: 'flex', gap: '10px', alignItems: 'center', position: 'relative' }}>
