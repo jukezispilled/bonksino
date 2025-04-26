@@ -32,7 +32,7 @@ const Grid = styled.div`
   }
 `
 
-const SolanaPrice = styled.div`
+const PriceBox = styled.div`
   position: fixed;
   bottom: 10px;
   right: 10px;
@@ -43,18 +43,24 @@ const SolanaPrice = styled.div`
   font-size: 0.875rem;
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 16px;
   z-index: 1000;
-  
-  img {
-    width: 16px;
-    height: 16px;
+
+  .price {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+
+    img {
+      width: 16px;
+      height: 16px;
+    }
   }
-  
+
   .price-up {
     color: #4ade80;
   }
-  
+
   .price-down {
     color: #f87171;
   }
@@ -71,55 +77,67 @@ export function GameGrid() {
 }
 
 export default function Dashboard() {
-  const [solanaPrice, setSolanaPrice] = useState<number | null>(null);
-  const [priceChange, setPriceChange] = useState<number>(0);
-  const [loading, setLoading] = useState<boolean>(true);
+  const [solanaPrice, setSolanaPrice] = useState<number | null>(null)
+  const [bonkPrice, setBonkPrice] = useState<number | null>(null)
+  const [solanaChange, setSolanaChange] = useState<number>(0)
+  const [bonkChange, setBonkChange] = useState<number>(0)
+  const [loading, setLoading] = useState<boolean>(true)
 
   useEffect(() => {
-    const fetchSolanaPrice = async () => {
+    const fetchPrices = async () => {
       try {
-        const response = await fetch('https://api.coingecko.com/api/v3/coins/solana');
-        const data = await response.json();
-        
-        // Make sure we're getting numbers
-        const currentPrice = parseFloat(data.market_data.current_price.usd);
-        const priceChangePercent = parseFloat(data.market_data.price_change_percentage_24h);
-        
-        if (!isNaN(currentPrice)) {
-          setSolanaPrice(currentPrice);
-        }
-        
-        if (!isNaN(priceChangePercent)) {
-          setPriceChange(priceChangePercent);
-        }
-        
-        setLoading(false);
-      } catch (error) {
-        console.error('Error fetching Solana price:', error);
-        setLoading(false);
-      }
-    };
+        const [solRes, bonkRes] = await Promise.all([
+          fetch('https://api.coingecko.com/api/v3/coins/solana'),
+          fetch('https://api.coingecko.com/api/v3/coins/bonk')
+        ])
 
-    fetchSolanaPrice();
-    const interval = setInterval(fetchSolanaPrice, 60000); // Update every minute
-    
-    return () => clearInterval(interval);
-  }, []);
+        const solData = await solRes.json()
+        const bonkData = await bonkRes.json()
+
+        const solPrice = parseFloat(solData.market_data.current_price.usd)
+        const solChange = parseFloat(solData.market_data.price_change_percentage_24h)
+        const bonkPrice = parseFloat(bonkData.market_data.current_price.usd)
+        const bonkChange = parseFloat(bonkData.market_data.price_change_percentage_24h)
+
+        if (!isNaN(solPrice)) setSolanaPrice(solPrice)
+        if (!isNaN(solChange)) setSolanaChange(solChange)
+        if (!isNaN(bonkPrice)) setBonkPrice(bonkPrice)
+        if (!isNaN(bonkChange)) setBonkChange(bonkChange)
+
+        setLoading(false)
+      } catch (err) {
+        console.error('Error fetching prices:', err)
+        setLoading(false)
+      }
+    }
+
+    fetchPrices()
+    const interval = setInterval(fetchPrices, 60000)
+
+    return () => clearInterval(interval)
+  }, [])
 
   return (
     <div style={{ marginTop: '2rem' }}>
       <WelcomeBanner />
       <GameGrid />
-      {!loading && solanaPrice !== null && (
-        <SolanaPrice>
-          <img src="https://cryptologos.cc/logos/solana-sol-logo.png?v=025" alt="SOL" />
-          ${solanaPrice.toFixed(2)}
-          {priceChange !== 0 && (
-            <span className={priceChange >= 0 ? 'price-up' : 'price-down'}>
-              {priceChange >= 0 ? '↑' : '↓'}{Math.abs(priceChange).toFixed(2)}%
+      {!loading && solanaPrice !== null && bonkPrice !== null && (
+        <PriceBox>
+          <div className="price">
+            <img src="https://assets.coingecko.com/coins/images/4128/small/solana.png" alt="SOL" />
+            ${solanaPrice.toFixed(2)}
+            <span className={solanaChange >= 0 ? 'price-up' : 'price-down'}>
+              {solanaChange >= 0 ? '↑' : '↓'}{Math.abs(solanaChange).toFixed(2)}%
             </span>
-          )}
-        </SolanaPrice>
+          </div>
+          <div className="price">
+            <img src="/bonk.png" alt="BONK" style={{ width: 16, height: 16 }} />
+            ${bonkPrice.toFixed(6)}
+            <span className={bonkChange >= 0 ? 'price-up' : 'price-down'}>
+              {bonkChange >= 0 ? '↑' : '↓'}{Math.abs(bonkChange).toFixed(2)}%
+            </span>
+          </div>
+        </PriceBox>
       )}
     </div>
   )

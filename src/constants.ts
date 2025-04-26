@@ -41,6 +41,7 @@ const lp = (tokenMint: PublicKey | string, poolAuthority?: PublicKey | string): 
 export const POOLS = [
   // SOL:
   lp('So11111111111111111111111111111111111111112'),
+  lp('DezXAZ8z7PnrnRJjz3wXBoRgixCa6xjnB7YaB1pPB263'),
 ]
 
 // The default token to be selected
@@ -59,6 +60,15 @@ export const TOKEN_METADATA: (Partial<TokenMeta> & {mint: PublicKey})[] = [
       "https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/So11111111111111111111111111111111111111112/logo.png",
     baseWager: 1e9,
     decimals: 9,
+  },
+  {
+    mint: new PublicKey("DezXAZ8z7PnrnRJjz3wXBoRgixCa6xjnB7YaB1pPB263"),
+    name: "Bonk",
+    symbol: "Bonk",
+    image:
+      "/bonk.png",
+    baseWager: 1e5,
+    decimals: 5,
   },
 ]
 

@@ -7,7 +7,7 @@
 :root {
   --background-color: #000000;
   --text-color: #ffffff;
-  --gamba-ui-primary-color: #9564ff;
+  --gamba-ui-primary-color: #ff9f1c;
 
   --gamba-ui-border-radius: 10px;
 
@@ -15,13 +15,20 @@
   --gamba-ui-button-default-background-hover: #11111d;
   --gamba-ui-button-default-color: white;
 
-  --gamba-ui-button-main-background: #8851ff;
+  --gamba-ui-button-main-background: #ff9f1c;
   --gamba-ui-button-main-color: white;
-  --gamba-ui-button-main-background-hover: #9564ff;
+  --gamba-ui-button-main-background-hover: #ff9f1c;
 
   --gamba-ui-input-background: #0e0e16;
   --gamba-ui-input-color: #ffffff;
   --gamba-ui-input-background-hover: #11111d;
+}
+
+html, body {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
 }
 
 body, input, button, textarea, pre {
@@ -34,12 +41,18 @@ h1, h2 {
 }
 
 body {
-  background: var(--background-color);
+  /* Background image added here */
+  background-image: url('/bg.jpg'); /* Path to your background image */
+  background-size: cover; /* Ensures the image covers the whole body */
+  background-position: center; /* Centers the image */
+  background-repeat: no-repeat; /* Prevents the image from repeating */
+  
+  /* Existing body styles */
   color: var(--text-color);
   cursor: default;
   margin: 0;
   overflow-y: scroll;
-  overflow-x: hidden;
+  overflow-x: hidden;  /* Prevent horizontal scroll */
   -webkit-tap-highlight-color: transparent;
 }
 

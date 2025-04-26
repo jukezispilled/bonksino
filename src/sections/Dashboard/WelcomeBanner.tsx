@@ -41,7 +41,7 @@ const Hero = styled.div`
 `;
 
 const Badge = styled.div`
-  background: #8156F6;
+  background: #ff9f1c;
   color: white;
   font-size: 0.9rem;
   font-weight: 600;
@@ -58,7 +58,7 @@ const Badge = styled.div`
 
   &:hover {
     transform: scale(1.05); /* Slight scale effect on hover */
-    background: #6A3BEA;
+    background: #ff9f1c;
   }
 
   span {
@@ -68,7 +68,7 @@ const Badge = styled.div`
 `;
 
 export function WelcomeBanner() {
-  const [address] = useState("362sfz3U9J7hCj6D3L9R6mmZdMCcKjUGYkTNetEApump"); // Replace with real value
+  const [address] = useState("XXXXXXXXXXXXXXXX"); // Replace with real value
 
   const getAbbreviatedAddress = (address: string | any[]) => {
     return `${address.slice(0, 3)}...${address.slice(-3)}`;
@@ -87,7 +87,7 @@ export function WelcomeBanner() {
         </span>
       </Badge>
       <div>
-        <h1>Trenchsino</h1>
+        <h1>Bonkasino</h1>
         <p>Instant on-chain gambling. Best odds right from your wallet</p>
       </div>
     </Hero>
