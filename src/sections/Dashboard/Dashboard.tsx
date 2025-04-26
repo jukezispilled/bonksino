@@ -64,6 +64,25 @@ const PriceBox = styled.div`
   .price-down {
     color: #f87171;
   }
+
+  @media (max-width: 1024px) {
+    display: none;
+  }
+`
+
+const BottomImage = styled.div`
+  position: fixed;
+  bottom: 10px;
+  left: 10px;
+  z-index: 500;
+  
+  img {
+    width: 150px;
+  }
+
+  @media (max-width: 1024px) {
+    display: none;
+  }
 `
 
 export function GameGrid() {
@@ -139,6 +158,11 @@ export default function Dashboard() {
           </div>
         </PriceBox>
       )}
+
+      {/* Bottom left image */}
+      <BottomImage>
+        <img src="/b.png" alt="Bonkin" />
+      </BottomImage>
     </div>
   )
 }

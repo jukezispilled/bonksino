@@ -24,13 +24,6 @@
   --gamba-ui-input-background-hover: #11111d;
 }
 
-html, body {
-  height: 100%;
-  width: 100%;
-  margin: 0;
-  padding: 0;
-}
-
 body, input, button, textarea, pre {
   font-family: 'Pixelify Sans', sans-serif;
   font-size: 16px;
@@ -41,18 +34,12 @@ h1, h2 {
 }
 
 body {
-  /* Background image added here */
-  background-image: url('/bg.jpg'); /* Path to your background image */
-  background-size: cover; /* Ensures the image covers the whole body */
-  background-position: center; /* Centers the image */
-  background-repeat: no-repeat; /* Prevents the image from repeating */
-  
-  /* Existing body styles */
+  background: var(--background-color);
   color: var(--text-color);
   cursor: default;
   margin: 0;
   overflow-y: scroll;
-  overflow-x: hidden;  /* Prevent horizontal scroll */
+  overflow-x: hidden;
   -webkit-tap-highlight-color: transparent;
 }
 
