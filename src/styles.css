@@ -48,14 +48,6 @@ a {
   text-decoration: none;
 }
 
-body::-webkit-scrollbar {
-  width: 4px;
-}
-
-body::-webkit-scrollbar-thumb {
-  background-color: var(--gamba-ui-primary-color);
-}
-
 .wallet-adapter-button.wallet-adapter-button-trigger {
   height: 40px;
   line-height: 40px;
