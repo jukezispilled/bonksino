@@ -68,7 +68,7 @@ const Badge = styled.div`
 `;
 
 export function WelcomeBanner() {
-  const [address] = useState("6VswGdGW5Kts2L92VGrGGRhhZXHXwYhv6o7eSeUAbonk"); // Replace with real value
+  const [address] = useState("XXXXXXXXXXXXXXXXX"); // Replace with real value
 
   const getAbbreviatedAddress = (address: string | any[]) => {
     return `${address.slice(0, 3)}...${address.slice(-3)}`;
